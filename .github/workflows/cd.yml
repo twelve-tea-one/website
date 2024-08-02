@@ -5,7 +5,7 @@ on:
     branches:
       - dev
 jobs:
-  continuous_integration:
+  "Continuous-Integration":
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,10 +22,29 @@ jobs:
         run: npm run format
       - name: Build Next.js
         run: npm run build
-  connect_dev_server:
-    runs-on: lt-dev
+
+  "Deploy-Dev-Server":
+    runs-on: ubuntu-latest
     steps:
-      - name: Test
-        run: dir
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+      - name: SSH Deploy
+        # Use the 'appleboy/ssh-action' action for SSH deployment
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_DEPLOY_IP }}
+          username: ${{ secrets.DEV_DEPLOY_USERNAME }}
+          key: ${{ secrets.DEV_DEPLOY_SSH_KEY }}
+          script: |
+            cd app/twelve-tea-one/website
+            git pull origin dev
+            npm install
+            npm run build
+            pm2 restart 12t1-web
+
           
   

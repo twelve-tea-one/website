@@ -42,6 +42,3 @@ jobs:
             npm install
             npm run build
             pm2 restart 12t1-web
-
-          
-  

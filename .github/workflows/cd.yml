@@ -22,10 +22,6 @@ jobs:
         run: npm run format
       - name: Build Next.js
         run: npm run build
-
-  "Deploy-Dev-Server":
-    runs-on: ubuntu-latest
-    steps:
       - name: Connect to Tailscale
         uses: tailscale/github-action@v2
         with:
@@ -33,14 +29,12 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
       - name: SSH Deploy
-        # Use the 'appleboy/ssh-action' action for SSH deployment
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DEV_DEPLOY_IP }}
           username: ${{ secrets.DEV_DEPLOY_USERNAME }}
           key: ${{ secrets.DEV_DEPLOY_SSH_KEY }}
           script: |
-            whoami
             cd app/twelve-tea-one/website
             git pull origin dev
             npm install

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Button from "./ui/custom/NavbarButton";
+import Button from "./ui/custom/Button";
 import Logo from "@/assets/images/logo.png";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "./ui/DropdownMenu";
 import VN_Flag from "@/assets/images/vn.svg";
@@ -17,13 +17,13 @@ export default function Navbar() {
         {
         // Development warning
         process.env.NODE_ENV == "development" && (
-        <div className="h-10 bg-red-400 flex items-center justify-center gap-2">
+        <div className="sticky top-0 z-10 h-10 bg-red-400 flex items-center justify-center gap-2">
             <TriangleAlert size={16} />
             <p className="font-bold text-white">This is a development website of <Link className="underline hover:text-gray-200" href="https://github.com/twelve-tea-one/website" target="_blank">TwelveTeaOne Yearbook website</Link>. Things may break!</p>
         </div>
         )}
         
-        <div className="w-full max-w-6xl flex justify-between items-center px-4 py-8 m-auto">
+        <div className="w-full max-w-7xl flex justify-between items-center px-4 py-8 m-auto">
             <div className="flex gap-4">
                 <Link href="/">
                     <Button active={path == "" ? true : false}>
@@ -71,7 +71,7 @@ export default function Navbar() {
                             </div>
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="p-0 bg-[#79b4b8]">
+                    <DropdownMenuContent className="p-0 bg-[#79b4b8] rounded-[16px]">
                         <div className="flex gap-6 items-center text-white px-4 py-1 cursor-pointer hover:bg-[#272727] duration-300">
                             <Image src={VN_Flag} alt="" />
                             <span>

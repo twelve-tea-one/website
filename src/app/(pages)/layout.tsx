@@ -9,7 +9,7 @@ export default function Layout({
     <>
         <body className="bg-[#deeced]">
             <Navbar />
-            <div className="w-full max-w-6xl m-auto text-text">
+            <div className="w-full max-w-7xl m-auto text-text">
                 { children }
             </div>
         </body>

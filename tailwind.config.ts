@@ -49,13 +49,13 @@ const config = {
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
+          DEFAULT: "#fffddc",
           foreground: "hsl(var(--card-foreground))",
         },
         buttonActive: {
           DEFAULT: "#282828",
         },
-        text: {
+        gray: {
           DEFAULT: "#5f5f5f",
         }
       },

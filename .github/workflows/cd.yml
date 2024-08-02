@@ -40,6 +40,7 @@ jobs:
           username: ${{ secrets.DEV_DEPLOY_USERNAME }}
           key: ${{ secrets.DEV_DEPLOY_SSH_KEY }}
           script: |
+            whoami
             cd app/twelve-tea-one/website
             git pull origin dev
             npm install

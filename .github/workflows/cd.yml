@@ -23,7 +23,7 @@ jobs:
       - name: Build Next.js
         run: npm run build
   connect_dev_server:
-    runs-on: self-hosted
+    runs-on: lt-dev
     steps:
       - name: Test
         run: dir

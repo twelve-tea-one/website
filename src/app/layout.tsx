@@ -9,16 +9,15 @@ const bryantlg = localFont({
     {
       path: '../assets/fonts/UTM_BryantLG.ttf',
       weight: '400',
-      style: 'normal'
+      style: 'normal',
     },
     {
       path: '../assets/fonts/UTM_BryantLG_B.ttf',
       weight: '700',
-      style: 'bold'
-    }
+      style: 'bold',
+    },
   ],
 })
-
 
 export const metadata: Metadata = {
   title: '12T1 Gallery',
@@ -32,9 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={bryantlg.className}>
-        {children}
-      </body>
+      <body className={bryantlg.className}>{children}</body>
     </html>
   )
 }

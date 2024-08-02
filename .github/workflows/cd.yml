@@ -5,7 +5,7 @@ on:
     branches:
       - dev
 jobs:
-  "Continuous-Integration":
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -37,6 +37,8 @@ jobs:
           script: |
             cd app/twelve-tea-one/website
             git pull origin dev
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             npm install
             npm run build
             pm2 restart 12t1-web

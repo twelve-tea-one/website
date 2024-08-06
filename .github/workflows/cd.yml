@@ -36,6 +36,9 @@ jobs:
           key: ${{ secrets.DEV_DEPLOY_SSH_KEY }}
           script: |
             cd app/twelve-tea-one/website
+            git stash --include-untracked
+            git reset --hard
+            git clean -fd
             git pull origin dev
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh

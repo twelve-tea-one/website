@@ -1,11 +1,6 @@
 export type Member = {
     name: string
     quote: string
-    sex: Sex
+    sex: "male" | "female"
     avatar: string
-}
-
-export enum Sex {
-    MALE,
-    FEMALE
 }

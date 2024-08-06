@@ -6,20 +6,37 @@ import Logo from "@/assets/images/logo.png";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "./ui/DropdownMenu";
 import VN_Flag from "@/assets/images/vn.svg";
 import GB_Flag from "@/assets/images/gb.svg";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Images, Languages, Search, SquarePen, TriangleAlert, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import { hash, branch } from "@/track.json";
 
 export default function Navbar() {
+    const [localDev, setLocalDev] = useState(false);
     const path = (usePathname()).split("/")[1];
+    
+    useEffect(() => {
+        if (process.env.NODE_ENV == "development") {
+            if (["localhost","127.0.0.1"].includes(document.location.hostname)) setLocalDev(true);
+        }
+    }, [localDev]);
+
     return (
         <>
         {
         // Development warning
         process.env.NODE_ENV == "development" && (
-        <div className="sticky top-0 z-10 h-10 bg-red-400 flex items-center justify-center gap-2">
+        <div className={cn("sticky top-0 z-10 h-10 flex items-center justify-center gap-2", localDev ? "bg-yellow-500 text-black" : "bg-red-400 text-white")}>
             <TriangleAlert size={16} />
-            <p className="font-bold text-white">This is a development website of <Link className="underline hover:text-gray-200" href="https://github.com/twelve-tea-one/website" target="_blank">TwelveTeaOne Yearbook website</Link>. Things may break!</p>
+            {localDev ? (
+                <p className="font-bold">Local Debug Build</p>
+            ) : (
+                <p className="font-bold">This is a development website of <Link className="underline hover:text-gray-200" href="https://github.com/twelve-tea-one/website" target="_blank">TwelveTeaOne Yearbook website</Link>. Things may break! {branch + "/" + hash}</p>
+            )
+            }
+            
         </div>
         )}
         

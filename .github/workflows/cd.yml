@@ -35,7 +35,8 @@ jobs:
           username: ${{ secrets.DEV_DEPLOY_USERNAME }}
           key: ${{ secrets.DEV_DEPLOY_SSH_KEY }}
           script: |
-            cd app/twelve-tea-one/website
+            cd /var/www/twelve-tea-one/website
+            pm2 delete 12T1_Web
             git stash --include-untracked
             git reset --hard
             git clean -fd
@@ -44,4 +45,4 @@ jobs:
             source ~/.nvm/nvm.sh
             npm install
             npm run build
-            pm2 restart 12t1-web
+            pm2 start npm --name "12T1_Web" -- start
